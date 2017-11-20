@@ -555,6 +555,7 @@ Now navigate to ``http://127.0.0.1:8000/store/products_list/1/`` and you should 
 
 
 #### Viewing Products
+![tasks app - add task](assets/django/update_and_update.png)
 
 
 #### Deleting and Updating a Product
