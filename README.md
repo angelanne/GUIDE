@@ -332,10 +332,6 @@ class InvalidParameter(APIException):
     detail = 'Invalid parameters'
 ```
 
-<<<<<<< HEAD
-
-=======
->>>>>>> cfffe7bf00426073fd3c1af54ff346a56865bf93
 Flask API has an [APIException](http://www.flaskapi.org/api-guide/exceptions/) class which we have inherited to create our custom Exception. Let's include the exception in our `index` view:
 
 ```python
@@ -345,6 +341,7 @@ def index():
         tasks = Task.query.all()
         results = [t.to_json() for t in tasks]
         return results, status.HTTP_201_CREATED
+
     elif request.method == 'POST':
         if 'task_name' in request.data:
             task_name = request.data['task_name']
@@ -402,6 +399,7 @@ def manage_tasks(id):
     if request.method == 'GET':
         response = task.to_json()
         return response
+
     elif request.method == 'DELETE':
         db.session.delete(task)
         db.session.commit()
@@ -512,6 +510,7 @@ def index():
         tasks = Task.query.all()
         results = [t.to_json() for t in tasks]
         return results, status.HTTP_201_CREATED
+
     elif request.method == 'POST':
         if 'task_name' in request.data:
             task_name = request.data['task_name']
@@ -571,8 +570,7 @@ from flask import request, render_template
 Test!
 
 ### Aborting
-It's worth noting that you can use an built-in `abort()` method to handle errors:
-Using the abort() function is the simplest way to handle exceptions in Flask. This type works by just raising an exception by the error code without importing the exception.
+It's worth noting that you can use an built-in `abort()` method to handle errors. This is the simplest way to handle exceptions in Flask. This type works by just raising an exception by the error code without importing the exception.
 
 Let's write an abort() exception if a task does not exist.
 
@@ -591,6 +589,7 @@ def manage_tasks(id):
         
 
 ```
+
 
 HTTPException
 
@@ -619,9 +618,13 @@ def manage_tasks(id):
     elif request.method == 'DELETE':...
 
 ```
+Add the import:
+
+```python
+from app.errors import PageNotFound
+```
+
         
-
-
 Although there are various ways you can handle exceptions in your Flask Application, it is worth noting that the ``APIException`` class provided by Flask gives a fuller content to the response and  appropriate rendering. This is an important aspect because you don't want to leak information to the outside world because of improperly handles exceptions.
 
 
@@ -671,4 +674,3 @@ Now, when you run the app, you should see the log file file up.
 I hope this tutorial has helped you understand exception handling in Flask. Properly handling exceptions is very, very helpful especially in production because a user may abandon your app if errors are not properly handled.
 
 If you have any questions related to exceptions, please let me know in the comments.
-
